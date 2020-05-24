@@ -1,13 +1,20 @@
 export default class CustomSection extends HTMLElement {
     constructor() {
       super();
-      this.photoId = this.getAttribute("photoId") || "sid";
-      this.class = this.getAttribute("class") || "big";
-      this.previewSize = this.getAttribute("previewSize") || "n";
+      this.sectionId = this.getAttribute("sectionId");
+      this.h4 = this.getAttribute("h4");
+      this.commandText = this.getAttribute("commandText");
     }
 
     connectedCallback() {
-      this.innerHTML = `<div class="${this.class}"><img id="myImg" src="${this.photoId}${this.previewSize}.jpg" onclick="setImage('${this.photoId}','c.jpg')"> </div>`;
+      this.innerHTML = `<section id="${this.sectionId}">
+      <div>
+          <h4>${this.h4}</h4>
+          <p style="padding: 15px; background: #eee;border-radius: 5px;">
+            ${this.commandText}
+          </p>
+      </div>
+  </section>`;
     }
   }
 
