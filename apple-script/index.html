@@ -167,7 +167,7 @@
               end if
             end repeat
 
-
+            // iteration over all subfolders in Jira folder
             set folder_list to every folder of jiraFolder
             repeat with afolder in folder_list
               set jiraSubFolderMessages to messages of afolder
