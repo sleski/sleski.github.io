@@ -10,7 +10,7 @@ export default class CustomSection extends HTMLElement {
       this.innerHTML = `<section id="${this.sectionId}">
       <div>
           <h4>${this.h4}</h4>
-          <p style="padding: 15px; background: #eee;border-radius: 5px;">
+          <p style="padding: 15px; background: #eee;border-radius: 5px;  pre-wrap;">
             ${this.commandText}
           </p>
       </div>
