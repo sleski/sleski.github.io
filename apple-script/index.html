@@ -5,7 +5,7 @@
   <div>
       <h4>Delete emails from outlook:</h4>
       <p style="padding: 15px; background: #eee;border-radius: 5px; white-space: pre-wrap;">
-        -- Correct job, more details here: https://medium.com/hackernoon/automated-inbox-cleansing-with-outlook-2016-and-applescript-49cf4c4422fa
+        -- Correct job, more details here: <a href="https://medium.com/hackernoon/automated-inbox-cleansing-with-outlook-2016-and-applescript-49cf4c4422fa">Cleaning Outlook with Apple Script</a>
         set shortCutoff1 to 1 * hours
         set shortCutoff4 to 4 * hours
         set shortCutoff24 to 24 * hours
@@ -187,6 +187,35 @@
         end if
 
       </p>
+  </div>
+
+  <div>
+    <h4>Delete emails from outlook:</h4>
+    <p style="padding: 15px; background: #eee;border-radius: 5px; white-space: pre-wrap;">
+      -- Create plist file - /Library/LaunchAgents/outlook.delete.plist
+      -- /Users/sleski/Library/Scripts/outlook-jenkins.scpt <- this is a apple script which we have above
+      <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>it.tostao.outlook.cleanup</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>osascript</string>
+        <string>/Users/sleski/Library/Scripts/outlook-jenkins.scpt</string>
+    </array>
+    <key>StandardOutPath</key>
+    <string>/usr/local/var/log/outlook-cleanup.log</string>
+    <key>StandardErrorPath</key>
+    <string>/usr/local/var/log/outlook-cleanup.log</string>
+    <key>StartInterval</key>
+    <integer>3600</integer>
+</dict>
+</plist>
+
+    </p>
   </div>
 </section>
 
