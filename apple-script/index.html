@@ -5,186 +5,191 @@
   <div>
       <h4>Delete emails from outlook:</h4>
       <p style="padding: 15px; background: #eee;border-radius: 5px; white-space: pre-wrap;">
+
         -- Correct job, more details here: <a href="https://medium.com/hackernoon/automated-inbox-cleansing-with-outlook-2016-and-applescript-49cf4c4422fa">Cleaning Outlook with Apple Script</a>
-        set shortCutoff1 to 1 * hours
-        set shortCutoff4 to 4 * hours
-        set shortCutoff24 to 24 * hours
-        set shortCutoff36 to 36 * hours
-        set shortCutoff48 to 48 * hours
+set shortCutoff1 to 1 * hours
+set shortCutoff4 to 4 * hours
+set shortCutoff24 to 24 * hours
+set shortCutoff36 to 36 * hours
+set shortCutoff48 to 48 * hours
 
-        -- 30days (24 x 30)
-        set shortCutoff720 to 720 * hours
+-- 30days (24 x 30)
+set shortCutoff720 to 720 * hours
 
-        set today to (current date)
+set today to (current date)
 
-        if application "Microsoft Outlook" is running then
-          tell application "Microsoft Outlook"
+if application "Microsoft Outlook" is running then
+	tell application "Microsoft Outlook"
 
-            log "Outlook cleanup ran ]:->"
-
-
-            set inboxFolder to folder "Inbox" of default account
-            --jenkins 1 hours
-            set jenkinsFolder to folder "jenkins" of inboxFolder
-            set jenkinsMessages to messages of jenkinsFolder
-            set countDeletedJenkins to 0
-            repeat with aMessage in jenkinsMessages
-              set messageTime to time received of aMessage
-              set messageAge to today - messageTime
-              if messageAge > shortCutoff1 or (is read) of aMessage is true then
-                delete aMessage
-                set countDeletedJenkins to countDeletedJenkins + 1
-              end if
-            end repeat
-            log "Outlook cleanup ran at " & today & " - " & countDeletedJenkins & " deleted jenkins email(s)"
-
-            --phraseapp
-            set phraseappFolder to folder "phraseapp" of inboxFolder
-            set phraseappMessages to messages of phraseappFolder
-            set countDeletedPhraseapp to 0
-            repeat with aMessage in phraseappMessages
-              set messageTime to time received of aMessage
-              set messageAge to today - messageTime
-              if messageAge > shortCutoff1 or (is read) of aMessage is true then
-                delete aMessage
-                set countDeletedPhraseapp to countDeletedPhraseapp + 1
-              end if
-            end repeat
-            log "Outlook cleanup ran at " & today & " - " & countDeletedPhraseapp & " deleted phraseapp emails(s)"
+		log "Outlook cleanup ran ]:->"
 
 
-            --Noris
-            set norisFolder to folder "Noris" of inboxFolder
-            set norisMessages to messages of norisFolder
-            set countDeletedNoris to 0
-            repeat with aMessage in norisMessages
-              set messageTime to time received of aMessage
-              set messageAge to today - messageTime
-              if messageAge > shortCutoff4 or (is read) of aMessage is true then
-                delete aMessage
-                set countDeletedNoris to countDeletedNoris + 1
-              end if
-            end repeat
-            log "Outlook cleanup ran at " & today & " - " & countDeletedNoris & " deleted Noris emails(s)"
+		set inboxFolder to folder "Inbox" of default account
+		--jenkins 1 hours
+		set jenkinsFolder to folder "jenkins" of inboxFolder
+		set jenkinsMessages to messages of jenkinsFolder
+		set countDeletedJenkins to 0
+		repeat with aMessage in jenkinsMessages
+			set messageTime to time received of aMessage
+			set messageAge to today - messageTime
+			if messageAge > shortCutoff1 or (is read) of aMessage is true then
+				delete aMessage
+				set countDeletedJenkins to countDeletedJenkins + 1
+			end if
+		end repeat
+		log "Outlook cleanup ran at " & today & " - " & countDeletedJenkins & " deleted jenkins email(s)"
+
+		--phraseapp
+		set phraseappFolder to folder "phraseapp" of inboxFolder
+		set phraseappMessages to messages of phraseappFolder
+		set countDeletedPhraseapp to 0
+		repeat with aMessage in phraseappMessages
+			set messageTime to time received of aMessage
+			set messageAge to today - messageTime
+			if messageAge > shortCutoff1 or (is read) of aMessage is true then
+				delete aMessage
+				set countDeletedPhraseapp to countDeletedPhraseapp + 1
+			end if
+		end repeat
+		log "Outlook cleanup ran at " & today & " - " & countDeletedPhraseapp & " deleted phraseapp emails(s)"
 
 
-            --Github
-            set githubFolder to folder "Github" of inboxFolder
-            set githubMessages to messages of githubFolder
-            set countDeletedGithub to 0
-            repeat with aMessage in githubMessages
-              set messageTime to time received of aMessage
-              set messageAge to today - messageTime
-              if messageAge > shortCutoff4 or (is read) of aMessage is true then
-                delete aMessage
-                set countDeletedGithub to countDeletedGithub + 1
-              end if
-            end repeat
-            log "Outlook cleanup ran at " & today & " - " & countDeletedGithub & " deleted Github emails(s)"
-
-            --test-emails
-            set tmFolder to folder "test-emails" of inboxFolder
-            set teMessages to messages of tmFolder
-            set countDeletedTE to 0
-            repeat with aMessage in teMessages
-              set messageTime to time received of aMessage
-              set messageAge to today - messageTime
-              if messageAge > shortCutoff1 or (is read) of aMessage is true then
-                delete aMessage
-                set countDeletedTE to countDeletedTE + 1
-              end if
-            end repeat
-            log "Outlook cleanup ran at " & today & " - " & countDeletedTE & " deleted test-emails emails(s)"
-
-            --sentry
-            set sentryFolder to folder "sentry" of inboxFolder
-            set sentryMessages to messages of sentryFolder
-            set countDeletedsentry to 0
-            repeat with aMessage in sentryMessages
-              set messageTime to time received of aMessage
-              set messageAge to today - messageTime
-              if messageAge > shortCutoff1 or (is read) of aMessage is true then
-                delete aMessage
-                set countDeletedsentry to countDeletedsentry + 1
-              end if
-            end repeat
-            log "Outlook cleanup ran at " & today & " - " & countDeletedsentry & " deleted sentry emails(s)"
+		--Noris
+		set norisFolder to folder "Noris" of inboxFolder
+		set norisMessages to messages of norisFolder
+		set countDeletedNoris to 0
+		repeat with aMessage in norisMessages
+			set messageTime to time received of aMessage
+			set messageAge to today - messageTime
+			if messageAge > shortCutoff4 or (is read) of aMessage is true then
+				delete aMessage
+				set countDeletedNoris to countDeletedNoris + 1
+			end if
+		end repeat
+		log "Outlook cleanup ran at " & today & " - " & countDeletedNoris & " deleted Noris emails(s)"
 
 
-            --Trash
-            set trashFolder to folder "Deleted Items" of default account
-            set trashMessages to messages of trashFolder
-            set countDeletedTrash to 0
-            repeat with aMessage in trashMessages
-              set messageTime to time received of aMessage
-              set messageAge to today - messageTime
-              if messageAge > shortCutoff24 or (is read) of aMessage is true then
-                delete aMessage
-                set countDeletedTrash to countDeletedTrash + 1
-              end if
-            end repeat
-            log "Outlook cleanup ran at " & today & " - " & countDeletedTrash & " deleted Trash emails(s)"
+		--Github
+		set githubFolder to folder "Github" of inboxFolder
+		set githubMessages to messages of githubFolder
+		set countDeletedGithub to 0
+		repeat with aMessage in githubMessages
+			set messageTime to time received of aMessage
+			set messageAge to today - messageTime
+			if messageAge > shortCutoff4 or (is read) of aMessage is true then
+				delete aMessage
+				set countDeletedGithub to countDeletedGithub + 1
+			end if
+		end repeat
+		log "Outlook cleanup ran at " & today & " - " & countDeletedGithub & " deleted Github emails(s)"
 
-            --ZZZ-newsletters-emails
-            set zzzFolder to folder "ZZZ-newsletters-emails" of inboxFolder
-            set zzzMessages to messages of zzzFolder
-            set countDeletedZzz to 0
-            repeat with aMessage in zzzMessages
-              set messageTime to time received of aMessage
-              set messageAge to today - messageTime
-              if messageAge > shortCutoff1 or (is read) of aMessage is true then
-                delete aMessage
-                set countDeletedZzz to countDeletedZzz + 1
-              end if
-            end repeat
-            log "Outlook cleanup ran at " & today & " - " & countDeletedZzz & " deleted ZZZ-newsletters-emails emails(s)"
+		--test-emails
+		set tmFolder to folder "test-emails" of inboxFolder
+		set teMessages to messages of tmFolder
+		set countDeletedTE to 0
+		repeat with aMessage in teMessages
+			set messageTime to time received of aMessage
+			set messageAge to today - messageTime
+			if messageAge > shortCutoff1 or (is read) of aMessage is true then
+				delete aMessage
+				set countDeletedTE to countDeletedTE + 1
+			end if
+		end repeat
+		log "Outlook cleanup ran at " & today & " - " & countDeletedTE & " deleted test-emails emails(s)"
 
-
-            --Junk Email
-            set junkFolder to folder "Junk Email" of default account
-            set junkMessages to messages of junkFolder
-            set countDeletedJunk to 0
-            repeat with aMessage in junkMessages
-              set messageTime to time received of aMessage
-              set messageAge to today - messageTime
-              if messageAge > shortCutoff36 or (is read) of aMessage is true then
-                delete aMessage
-                set countDeletedJunk to countDeletedJunk + 1
-              end if
-            end repeat
-            log "Outlook cleanup ran at " & today & " - " & countDeletedJunk & " deleted Junk emails(s)"
-
+		--sentry
+		set sentryFolder to folder "sentry" of inboxFolder
+		set sentryMessages to messages of sentryFolder
+		set countDeletedsentry to 0
+		repeat with aMessage in sentryMessages
+			set messageTime to time received of aMessage
+			set messageAge to today - messageTime
+			if messageAge > shortCutoff1 or (is read) of aMessage is true then
+				delete aMessage
+				set countDeletedsentry to countDeletedsentry + 1
+			end if
+		end repeat
+		log "Outlook cleanup ran at " & today & " - " & countDeletedsentry & " deleted sentry emails(s)"
 
 
-            set jiraFolder to folder "Jira" of inboxFolder
+		--Trash
+		set trashFolder to folder "Deleted Items" of default account
+		set trashMessages to messages of trashFolder
+		set countDeletedTrash to 0
+		repeat with aMessage in trashMessages
+			set messageTime to time received of aMessage
+			set messageAge to today - messageTime
+			if messageAge > shortCutoff24 or (is read) of aMessage is true then
+				delete aMessage
+				set countDeletedTrash to countDeletedTrash + 1
+			end if
+		end repeat
+		log "Outlook cleanup ran at " & today & " - " & countDeletedTrash & " deleted Trash emails(s)"
 
-            set jiraFolderMessages to messages of jiraFolder
-            repeat with aMessage in jiraFolderMessages
-              set messageTime to time received of aMessage
-              set messageAge to today - messageTime
-              if (messageAge > shortCutoff720) and (is read) of aMessage is true then
-                delete aMessage
-              end if
-            end repeat
+		--ZZZ-newsletters-emails
+		set zzzFolder to folder "ZZZ-newsletters-emails" of inboxFolder
+		set zzzMessages to messages of zzzFolder
+		set countDeletedZzz to 0
+		repeat with aMessage in zzzMessages
+			set messageTime to time received of aMessage
+			set messageAge to today - messageTime
+			if messageAge > shortCutoff1 or (is read) of aMessage is true then
+				delete aMessage
+				set countDeletedZzz to countDeletedZzz + 1
+			end if
+		end repeat
+		log "Outlook cleanup ran at " & today & " - " & countDeletedZzz & " deleted ZZZ-newsletters-emails emails(s)"
 
-            // iteration over all subfolders in Jira folder
-            set folder_list to every folder of jiraFolder
-            repeat with afolder in folder_list
-              set jiraSubFolderMessages to messages of afolder
-              repeat with aMessage in jiraSubFolderMessages
-                set messageTime to time received of aMessage
-                set messageAge to today - messageTime
-                if (messageAge > shortCutoff720) and (is read) of aMessage is true then
-                  delete aMessage
-                end if
-              end repeat
 
-            end repeat
+		--Junk Email
+		set junkFolder to folder "Junk Email" of default account
+		set junkMessages to messages of junkFolder
+		set countDeletedJunk to 0
+		repeat with aMessage in junkMessages
+			set messageTime to time received of aMessage
+			set messageAge to today - messageTime
+			if messageAge > shortCutoff36 or (is read) of aMessage is true then
+				delete aMessage
+				set countDeletedJunk to countDeletedJunk + 1
+			end if
+		end repeat
+		log "Outlook cleanup ran at " & today & " - " & countDeletedJunk & " deleted Junk emails(s)"
 
-          end tell
-        else
-          log "" & today & "- nothing to delete, Outlook is not working."
-        end if
+
+
+		set jiraFolder to folder "Jira" of inboxFolder
+
+		set jiraFolderMessages to messages of jiraFolder
+		repeat with aMessage in jiraFolderMessages
+			set messageTime to time received of aMessage
+			set messageAge to today - messageTime
+			if (messageAge > shortCutoff720) and (is read) of aMessage is true then
+				delete aMessage
+			end if
+		end repeat
+
+
+		set folder_list to every folder of jiraFolder
+		repeat with afolder in folder_list
+			set jiraSubFolderMessages to messages of afolder
+			repeat with aMessage in jiraSubFolderMessages
+				set messageTime to time received of aMessage
+				set messageAge to today - messageTime
+				if (messageAge > shortCutoff720) and (is read) of aMessage is true then
+					delete aMessage
+				end if
+			end repeat
+
+		end repeat
+
+
+
+	end tell
+else
+	log "" & today & "- nothing to delete, Outlook is not working."
+end if
+
+
 
       </p>
   </div>
