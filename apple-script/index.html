@@ -83,6 +83,20 @@ if application "Microsoft Outlook" is running then
 		end repeat
 		log "Outlook cleanup ran at " & today & " - " & countDeletedGithub & " deleted Github emails(s)"
 
+    --Gitlab
+		set gitlabFolder to folder "Gitlab" of inboxFolder
+		set gitlabMessages to messages of gitlabFolder
+		set countDeletedGitlab to 0
+		repeat with aMessage in gitlabMessages
+			set messageTime to time received of aMessage
+			set messageAge to today - messageTime
+			if messageAge > shortCutoff48 and (is read) of aMessage is true then
+				delete aMessage
+				set countDeletedGitlab to countDeletedGitlab + 1
+			end if
+		end repeat
+		log "Outlook cleanup ran at " & today & " - " & countDeletedGitlab & " deleted Gitlab emails(s)"
+
 		--test-emails
 		set tmFolder to folder "test-emails" of inboxFolder
 		set teMessages to messages of tmFolder
