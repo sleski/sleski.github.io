@@ -2,7 +2,7 @@ export default class YoutubePreview extends HTMLElement {
   constructor() {
     super();
     this.clipID = this.getAttribute("clipID");
-    this.alignParam = this.getAttribute("alignParam") || "left";
+    this.alignParam = this.getAttribute("alignParam") || "center";
     this.textContent = this.getAttribute("description") || ""
   }
 
