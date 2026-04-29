@@ -1,2 +1,2 @@
-import SImage from "./YoutubePreview.js"
-import SImage2 from "./YoutubeShortPreview.js"
+import YoutubePreview from "./YoutubePreview.js"
+import YoutubeShortPreview from "./YoutubeShortPreview.js"
